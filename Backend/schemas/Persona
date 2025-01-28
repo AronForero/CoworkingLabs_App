@@ -1,0 +1,11 @@
+from pydantic import BaseModel, EmailStr, DateTime
+
+class PersonaCreate(BaseModel):
+    id_persona = int
+    id_empresa = int
+    cedula = str
+    nombre = str
+    correo = str
+    telefono = str
+    numero_id_huella = str
+    fecha_registro = DateTime

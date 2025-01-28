@@ -1,0 +1,19 @@
+from sqlalchemy import (
+    Column, Integer, DateTime, ForeignKey
+)
+from sqlalchemy.sql import func
+from sqlalchemy.orm import relationship
+from ..database import Base
+
+
+class EspaciosContrato(Base):
+    __tablename__ = 'espacios_contrato'
+
+    id_espacio_contrato = Column(Integer, primary_key=True)
+    id_contrato = Column(Integer, ForeignKey('contrato.id_contrato'), nullable=False)
+    id_tipo_espacio = Column(Integer, ForeignKey('tarifa.id_tipo_espacio'), nullable=False)
+    cantidad_espacios = Column(Integer, nullable=False)
+    created_at = Column(DateTime, server_default=func.now())
+
+    contrato = relationship("Contrato")
+    tarifa = relationship("Tarifa")

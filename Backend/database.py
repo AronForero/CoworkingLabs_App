@@ -19,3 +19,6 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base para modelos
 Base = declarative_base()
+
+# Crear las tablas en la base de datos
+Base.metadata.create_all(bind=engine)

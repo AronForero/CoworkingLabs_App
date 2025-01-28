@@ -1,22 +1,15 @@
 from fastapi import FastAPI
-from pydantic import BaseModel
-from .database import Base, engine
 from models.Empresa import Empresa
+from routers import Persona
 
 
 app = FastAPI()
-# Crear las tablas en la base de datos
-Base.metadata.create_all(bind=engine)
+
+app.include_router(Persona.router, prefix="/api", tags=["persona"])
 
 @app.get("/")
 def read_root():
     return {"message": "¡FastAPI is working ome!"}
-
-
-class Empresa(BaseModel):
-    id: int
-    nombre: str
-    nit: str
 
 @app.post("/empresas/")
 def create_empresa(empresa: Empresa):

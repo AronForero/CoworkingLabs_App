@@ -1,0 +1,17 @@
+from fastapi import APIRouter, Depends
+from sqlalchemy.orm import Session
+from models import Persona
+from dependencies import get_db
+from ..schemas import Persona as schema_persona
+
+router = APIRouter()
+
+@router.post("/persona/")
+def create_persona(persona: schema_persona.PersonaCreate, 
+                   db: Session = Depends(get_db)):
+    nueva_persona = Persona(**persona.dict())
+    print(nueva_persona)
+    #db.add(nueva_persona)
+    #db.commit()
+    #db.refresh(nueva_persona)
+    return nueva_persona
